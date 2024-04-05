@@ -31,7 +31,7 @@ and/or
 ## Roadmap
 - ~~plan architecture~~
 - make calculations in .js
-    - monthly contributions
+    - ~~monthly contributions~~
     - weekly contributions
     - fortnightly contributions
     - comparisons
