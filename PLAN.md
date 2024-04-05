@@ -31,6 +31,10 @@ and/or
 ## Roadmap
 - ~~plan architecture~~
 - make calculations in .js
+    - monthly contributions
+    - weekly contributions
+    - fortnightly contributions
+    - comparisons
 - build html page to take the inputs, and display outputs
 - style page and make usable without graphs
 - deploy to live
