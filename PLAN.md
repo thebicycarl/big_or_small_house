@@ -7,9 +7,13 @@ Also displays some current interest rate examples from a comparison site.
 
 ## Architecture
 Simple front-end website
+
 Need some way of displaying a graph/s
+
 .js file to hold the calculations
+
 Reverse compound interest calculator
+
 
 ## Calculations
 Interest is calculated on the daily balance, and charged monthly
