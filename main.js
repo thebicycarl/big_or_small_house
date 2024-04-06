@@ -19,20 +19,26 @@ function payoffExpensive(obj) {
     let current_loan_value = expensive_house_price - deposit
     let daily_interest_rate = interest_rate / 365 / 100
 
+    let calc_variables = {
+        current_loan_value,
+        contribution,
+        daily_interest_rate
+    }
+
     if (contribution_frequency === 'monthly') {
-        frequency_in_days = 365 / 12
-        return monthlyCalc(current_loan_value, contribution, frequency_in_days, daily_interest_rate)
+        return monthlyCalc(calc_variables)
     }
     if (contribution_frequency === 'fortnightly') {
-        frequency_in_days = 14
     }
     if (contribution_frequency === 'weekly') {
-        frequency_in_days = 7
+        
     }
 }
 
 // calculation for monthly contributions
-function monthlyCalc(current_loan_value, contribution, frequency_in_days, daily_interest_rate) {
+function monthlyCalc(obj) {
+    let { current_loan_value, contribution, daily_interest_rate } = obj
+    frequency_in_days = 365 / 12
     let total_interest_cost = 0
     let daily_count = 0
     while (current_loan_value > contribution) {
