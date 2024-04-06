@@ -1,37 +1,33 @@
 // main JS file to run the calculations
 
 // declare the input variables
-let expensive_house_price = 1000000
-let cheaper_house_price = 500000
-let deposit = 200000
-let contribution = 6000
-let contribution_frequency = 'monthly'
-let interest_rate = 7
-
-// convert contribution frequency from weekly/fortnightly/monthly etc into number of days
-function convertContributionFrequency(contribution_frequency) {
-    let frequency_in_days = null
-    if (contribution_frequency === 'weekly') {
-        frequency_in_days = 7
-    } else if (contribution_frequency === 'fortnightly') {
-        frequency_in_days = 14
-    } else if (contribution_frequency === 'monthly') {
-        frequency_in_days = 365 / 12
-    } else { return }
-
-    return frequency_in_days
+let loan_variables = {
+    expensive_house_price: 1000000,
+    cheaper_house_price: 50000,
+    deposit: 200000,
+    contribution: 6000,
+    contribution_frequency: 'monthly',
+    interest_rate: 7
 }
 
 // function that takes the inputs and returns:
 // - time to pay off loan
 // - total interest cost
-function payoffExpensive(house_price, deposit, contribution, contribution_frequency, interest_rate) {
-    let frequency_in_days = convertContributionFrequency(contribution_frequency)
-    let current_loan_value = house_price - deposit
+function payoffExpensive(obj) {
+    let { expensive_house_price, cheaper_house_price, deposit, contribution, contribution_frequency, interest_rate } = obj
+    let frequency_in_days = null
+    let current_loan_value = expensive_house_price - deposit
     let daily_interest_rate = interest_rate / 365 / 100
 
     if (contribution_frequency === 'monthly') {
+        frequency_in_days = 365 / 12
         return monthlyCalc(current_loan_value, contribution, frequency_in_days, daily_interest_rate)
+    }
+    if (contribution_frequency === 'fortnightly') {
+        frequency_in_days = 14
+    }
+    if (contribution_frequency === 'weekly') {
+        frequency_in_days = 7
     }
 }
 
@@ -58,7 +54,9 @@ function monthlyCalc(current_loan_value, contribution, frequency_in_days, daily_
 
 }
 
-console.log(payoffExpensive(expensive_house_price, deposit, contribution, contribution_frequency, interest_rate))
+
+
+console.log(payoffExpensive(loan_variables))
 
 // comparison function that takes the inputs and time to pay off an expensive loan, and returns:
 // - time to pay off cumulative cheaper loans until expensive house price is reached as equity
