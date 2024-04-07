@@ -36,11 +36,11 @@ and/or
 - ~~plan architecture~~
 - make calculations in .js
     - ~~monthly contributions~~
-    - weekly contributions
-    - fortnightly contributions
+    - ~~weekly contributions~~
     - comparisons
 - build html page to take the inputs, and display outputs
 - style page and make usable without graphs
+- add in error handling for loan terms that never pay off
 - deploy to live
 - star to github
 - add to portfolio page
