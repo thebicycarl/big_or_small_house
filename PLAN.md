@@ -20,7 +20,7 @@ Interest is calculated on the daily balance, and charged monthly
 ### Inputs: 
 - deposit
 - contribution amount
-- contribution frequency?
+- contribution frequency? initially just do calcs for monthly. include conversion from weekly to monthly payments, but note on the page that the comparison is done based on a monthly repayment.
 - interest rate 
 - house price 
 
@@ -35,8 +35,8 @@ and/or
 ## Roadmap
 - ~~plan architecture~~
 - make calculations in .js
-    - ~~monthly contributions~~
-    - ~~weekly contributions~~
+    - basic calculations on the inputs
+    - calculation for expensive house
     - comparisons
 - build html page to take the inputs, and display outputs
 - style page and make usable without graphs
@@ -47,6 +47,7 @@ and/or
 - upgrade the page to use graphs with D3.js
 - build web scraper to display interest rate options from main banks
 - post to LinkedIn
+- add 
 
 
 

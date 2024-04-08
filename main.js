@@ -5,7 +5,7 @@ let loan_variables = {
     expensive_house_price: 750000,
     cheaper_house_price: 500000,
     deposit: 150000,
-    contribution: 3000,
+    contribution: 3500,
     contribution_frequency: 'monthly',
     interest_rate: 6
 }
@@ -19,7 +19,7 @@ function payOffExpensive(obj) {
     let daily_interest_rate = (interest_rate / 365 / 100)
 
     let calc_variables = {
-        expensive_house_price,
+        house_price: expensive_house_price,
         current_loan_value,
         contribution,
         daily_interest_rate
@@ -43,9 +43,11 @@ function monthlyCalc(obj) {
     let daily_count = 0
     while (current_loan_value > contribution) {
         // calculate the interest cost for one day, based on the current loan value
-        let daily_interest_cost = Number((current_loan_value * daily_interest_rate).toFixed(2))        
+        let daily_interest_cost = current_loan_value * daily_interest_rate 
+               
         // calculate the total interest cost for the month
-        let cost_between_contributions = daily_interest_cost * frequency_in_days    
+        let cost_between_contributions = daily_interest_cost * frequency_in_days  
+         
         // add the average days for 1 month to the daily count
         daily_count += frequency_in_days                                            
         // add the cost for the month to the total interest cost
@@ -110,7 +112,7 @@ function payOffCheaper(obj) {
     let daily_interest_rate = (interest_rate / 365 / 100)
 
     let calc_variables = {
-        cheaper_house_price,
+        house_price: cheaper_house_price,
         current_loan_value,
         contribution,
         daily_interest_rate
@@ -127,6 +129,11 @@ function payOffCheaper(obj) {
 }
 
 // - amount of equity gained using cheaper loans in the same amount of time as the expensive loan
+// function comparison(cheaper_inputs, expensive_outputs) {
+//     const { expensive_house_price, cheaper_house_price, deposit, contribution, contribution_frequency, interest_rate } = cheaper_inputs
+
+// }
+
 
 // call functions and log the results
 
