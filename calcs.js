@@ -14,7 +14,7 @@ function runCalcs() {
     if (contribution_frequency === 'weekly') {
         contribution = contribution * 52 / 12
     }
-
+    console.log(contribution)
     let expensive_loan_value = expensive_house_price - deposit
     let cheaper_loan_value = cheaper_house_price - deposit
 
@@ -52,6 +52,7 @@ function calculatePayoff(loan_value, contribution, daily_interest_rate) {
         // then subtract the contribution for that month
         loan_value -= contribution
     }
+
 
     let year_count = daily_count / 365
 
