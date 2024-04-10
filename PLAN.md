@@ -35,9 +35,9 @@ and/or
 ## Roadmap
 - ~~plan architecture~~
 - make calculations in .js
-    - basic calculations on the inputs
-    - calculation for expensive house
-    - comparisons
+    - ~~basic calculations on the inputs~~
+    - ~~calculation for loan payoff~~
+    - comparison calcs
 - build html page to take the inputs, and display outputs
 - style page and make usable without graphs
 - add in error handling for loan terms that never pay off
