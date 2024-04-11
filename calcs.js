@@ -2,7 +2,9 @@
 
 // declare the input variables
 let expensive_house_price = 750000
+let formatted_expensive_price = expensive_house_price.toLocaleString()
 let cheaper_house_price = 500000
+let formatted_cheaper_price = cheaper_house_price.toLocaleString()
 let deposit = 150000
 let contribution = 3500
 let contribution_frequency = 'monthly'
@@ -18,22 +20,28 @@ function runCalcs() {
     let expensive_loan_value = expensive_house_price - deposit
     let cheaper_loan_value = cheaper_house_price - deposit
 
-    let payoff_expensive = calculatePayoff(expensive_loan_value, contribution, daily_interest_rate)
+    let payoff_expensive = calculatePayoff(expensive_loan_value, contribution, daily_interest_rate, contribution)
 
-    let payoff_cheaper = calculatePayoff(cheaper_loan_value, contribution, daily_interest_rate)
+    let payoff_cheaper = calculatePayoff(cheaper_loan_value, contribution, daily_interest_rate, contribution)
 
     console.log(payoff_expensive)
     console.log(payoff_cheaper)
     // let comparison_output = 
+    let time_to_parity = timeToParity(payoff_expensive, payoff_cheaper)
+
+    console.log(time_to_parity)
+    console.log(`If instead of buying a $${formatted_expensive_price} house, you bought a $${formatted_cheaper_price} house, you would reach the same level of equity in ${time_to_parity.years_to_parity} years and ${time_to_parity.months_remainder} months. That is, buying $${formatted_cheaper_price} houses one after the other, you would pay off ${formatted_expensive_price} in ${time_to_parity.years_to_parity} years and ${time_to_parity.months_remainder} months.`)
 }
 
 // function to calculate a single house
-function calculatePayoff(loan_value, contribution, daily_interest_rate) {
-    let start_value = loan_value
+// the payoff_to value is to determine how long and interest cost to pay off the loan to x. For the first instances, the contribution value is passed, as this will calculate the payoff until the loan reaches one contribution remaining. Then calculatePayoff is called as part of the comparison, with a remainder value passed as part of the comparison. 
+function calculatePayoff(loan_value, contribution, daily_interest_rate, payoff_to) {
+    
+    let loan_start_value = loan_value
     let total_interest_cost = 0
     let daily_count = 0
     let average_days = 365 / 12
-    while (loan_value > contribution) {
+    while (loan_value > payoff_to) {
         // calculate the interest cost for one day, based on the current loan value
         let daily_interest_cost = loan_value * daily_interest_rate
 
@@ -57,8 +65,8 @@ function calculatePayoff(loan_value, contribution, daily_interest_rate) {
     let year_count = daily_count / 365
 
     let payoff_outputs = {
-        start_value,
-        loan_value,
+        loan_start_value,
+        loan_end_value: loan_value,
         total_interest_cost,
         daily_count,
         year_count
@@ -67,5 +75,40 @@ function calculatePayoff(loan_value, contribution, daily_interest_rate) {
 }
 
 // function to perform the comparison (will be some duplication)
+// comparison: 
+// how long to payoff the same amount
+// how much equity in the same amount of time
+function timeToParity(payoff_expensive, payoff_cheaper) {
+    // how long to reach the more expensive value, given buying cheaper houses:
+    // first: calculate the whole value:
+    let number_of_times = payoff_expensive.loan_start_value / payoff_cheaper.loan_start_value
+    let whole_times = Math.floor(number_of_times) 
+
+    // then calculate the remainder:
+    let remainder = payoff_expensive.loan_start_value % payoff_cheaper.loan_start_value
+
+    // payoff_to is the cheaper loan amount minus the remainder, this is passed to calculatePayoff to determine the time and interest cost to payoff the remainder.
+    let payoff_to = payoff_cheaper.loan_start_value - remainder
+    let payoff_remainder = calculatePayoff(remainder, contribution, daily_interest_rate, payoff_to)
+
+    // the whole times multiplyed by the cheaper loan daily count, plus the payoff remainder daily count gives the number of days to reach the same level of equity as the expensive loan.
+    let days_to_parity = whole_times * payoff_cheaper.daily_count + payoff_remainder.daily_count
+
+    // then convert to years and months
+    let years_to_parity = Math.floor(days_to_parity / 365)
+    let months_remainder = Math.round((days_to_parity % 365) / 365 * 12)
+
+    // total interest cost 
+    let interest_cost_to_parity = Math.round(whole_times * payoff_cheaper.total_interest_cost + payoff_remainder.total_interest_cost)
+
+
+    let parity = {
+        years_to_parity,
+        months_remainder,
+        interest_cost_to_parity
+    }
+
+    return parity
+}
 
 runCalcs()

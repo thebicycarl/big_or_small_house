@@ -11,8 +11,7 @@
 // let daily_interest_rate = Number((interest_rate/365).toFixed(5))
 // console.log(daily_interest_rate)
 
-console.log(7.01/365)
-console.log(Number((7.01/365).toFixed(5)))
-console.log(7.02/365)
-console.log(7.03/365)
-console.log(7.04/365)
+let num = 7600000
+let formatted_num = num.toLocaleString()
+
+console.log(formatted_num)
