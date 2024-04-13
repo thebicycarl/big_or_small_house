@@ -1,16 +1,15 @@
-
 // test variables:
+// const months_remainder = 208
 // let loan_value = 500000
-// let contribution = 3500
-// let monthly_interest_rate = 6 / 12 / 100
-// let payoff_to = 0
+// const contribution = 3500
+// const monthly_interest_rate = 6/12/100
 
-export function calculatePayoff(loan_value, contribution, monthly_interest_rate, payoff_to) {
-
+export function equityGivenMonths(months_remainder, loan_value, contribution, monthly_interest_rate) {
+    let equity = 0
     let remaining_balance = loan_value
     let total_interest_cost = 0
     let months = 0
-    while (remaining_balance > payoff_to) {
+    while (months < months_remainder) {
         // calculate the interest cost the month, based on the current loan value
         let monthly_interest_cost = remaining_balance * monthly_interest_rate
         
@@ -23,24 +22,19 @@ export function calculatePayoff(loan_value, contribution, monthly_interest_rate,
         // and subtract from the loan value
         remaining_balance -= principle_repayment
 
+        // and add to the equity counter
+        equity += principle_repayment
+
         // increment month counter
-        months ++
+        months ++        
     }
 
-
-    let year_count = Math.floor(months / 12)
-    let and_months = months % 12
-
-    let payoff_outputs = {
-        loan_start_value: loan_value,
-        loan_end_value: remaining_balance,
-        total_interest_cost,
-        months,
-        year_count,
-        and_months
+    return {
+        equity,
+        total_interest_cost
     }
-    return payoff_outputs
+
 }
 
-// test log:
-// console.log(calculatePayoff(loan_value, contribution, monthly_interest_rate, payoff_to))
+// test console log
+// console.log(equityGivenMonths(months_remainder, loan_value, contribution, monthly_interest_rate))
