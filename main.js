@@ -40,16 +40,13 @@ function runCalcs() {
 
 }
 
-// function to perform the comparison (will be some duplication)
-// comparison: 
-// how long to payoff the same amount
+// comparison function: how long to reach the more expensive value, given buying cheaper houses:
 function timeToParity(payoff_expensive, payoff_cheaper, payoff_subsequent_cheaper) {
-    // how long to reach the more expensive value, given buying cheaper houses:
     // the first time the cheaper house is bought, the loan value includes the deposit. All subsequent loan payoffs are the whole cheaper house price
     // therefore subtract the first loan value off the expensive loan value: 
     let value_after_one = payoff_expensive.loan_start_value - payoff_cheaper.loan_start_value
 
-    // calculate the number of whole times the cheaper house price goes into the rest: 
+    // then calculate the number of whole times the cheaper house price goes into the rest: 
     let whole_times = Math.floor(value_after_one / cheaper_house_price)
 
     // then calculate the remainder: 

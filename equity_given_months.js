@@ -4,6 +4,7 @@
 // const contribution = 3500
 // const monthly_interest_rate = 6/12/100
 
+// function to calculate the amount paid off a loan in a certain amount of time (in months)
 export function equityGivenMonths(months_remainder, loan_value, contribution, monthly_interest_rate) {
     let equity = 0
     let remaining_balance = loan_value

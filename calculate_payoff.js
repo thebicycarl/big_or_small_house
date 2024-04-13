@@ -5,6 +5,7 @@
 // let monthly_interest_rate = 6 / 12 / 100
 // let payoff_to = 0
 
+// main function to perform a loan payoff calculation 
 export function calculatePayoff(loan_value, contribution, monthly_interest_rate, payoff_to) {
 
     let remaining_balance = loan_value
