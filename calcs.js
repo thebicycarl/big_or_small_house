@@ -29,14 +29,19 @@ function runCalcs() {
     // let comparison_output = 
     let time_to_parity = timeToParity(payoff_expensive, payoff_cheaper)
 
+    let same_time_equity = sameTimeEquity(payoff_expensive, payoff_cheaper)
+
+
     console.log(time_to_parity)
-    console.log(`If instead of buying a $${formatted_expensive_price} house, you bought a $${formatted_cheaper_price} house, you would reach the same level of equity in ${time_to_parity.years_to_parity} years and ${time_to_parity.months_remainder} months. That is, buying $${formatted_cheaper_price} houses one after the other, you would pay off ${formatted_expensive_price} in ${time_to_parity.years_to_parity} years and ${time_to_parity.months_remainder} months.`)
+    console.log(same_time_equity)
+
+    // console.log(`If instead of buying a $${formatted_expensive_price} house, you bought a $${formatted_cheaper_price} house, you would reach the same level of equity in ${time_to_parity.years_to_parity} years and ${time_to_parity.months_remainder} months. That is, buying $${formatted_cheaper_price} houses one after the other, you would pay off ${formatted_expensive_price} in ${time_to_parity.years_to_parity} years and ${time_to_parity.months_remainder} months.`)
 }
 
 // function to calculate a single house
 // the payoff_to value is to determine how long and interest cost to pay off the loan to x. For the first instances, the contribution value is passed, as this will calculate the payoff until the loan reaches one contribution remaining. Then calculatePayoff is called as part of the comparison, with a remainder value passed as part of the comparison. 
 function calculatePayoff(loan_value, contribution, daily_interest_rate, payoff_to) {
-    
+
     let loan_start_value = loan_value
     let total_interest_cost = 0
     let daily_count = 0
@@ -77,12 +82,12 @@ function calculatePayoff(loan_value, contribution, daily_interest_rate, payoff_t
 // function to perform the comparison (will be some duplication)
 // comparison: 
 // how long to payoff the same amount
-// how much equity in the same amount of time
+
 function timeToParity(payoff_expensive, payoff_cheaper) {
     // how long to reach the more expensive value, given buying cheaper houses:
     // first: calculate the whole value:
     let number_of_times = payoff_expensive.loan_start_value / payoff_cheaper.loan_start_value
-    let whole_times = Math.floor(number_of_times) 
+    let whole_times = Math.floor(number_of_times)
 
     // then calculate the remainder:
     let remainder = payoff_expensive.loan_start_value % payoff_cheaper.loan_start_value
@@ -110,5 +115,66 @@ function timeToParity(payoff_expensive, payoff_cheaper) {
 
     return parity
 }
+
+// equity gained in the same amount of time as paying off the expensive loan
+function sameTimeEquity(payoff_expensive, payoff_cheaper) {
+    // whole number of times the cheaper daily count goes into the expensive one
+    let whole_days = Math.floor(payoff_expensive.daily_count / payoff_cheaper.daily_count)
+    let whole_equity = whole_days * payoff_cheaper.loan_start_value
+    let whole_interest_cost = whole_days * payoff_cheaper.total_interest_cost
+
+    // calculate the remainder and pass it to function calculating how much equity is earned in a set amount of time
+    let days_remainder = payoff_expensive.daily_count % payoff_cheaper.daily_count
+    let paid_off_remainder = equityGivenDays(days_remainder, payoff_cheaper.loan_start_value, contribution, daily_interest_rate)
+    let equity_remainder = paid_off_remainder.equity
+    let interest_cost_remainder = paid_off_remainder.total_interest_cost
+
+    // return the total equity and total interest cost
+    let same_time_equity = whole_equity + equity_remainder
+    let same_time_interest_cost = whole_interest_cost + interest_cost_remainder
+    return {
+        same_time_equity,
+        same_time_interest_cost
+    }
+}
+
+// equity given an amount of time in days
+function equityGivenDays(number_of_days, loan_value, contribution, daily_interest_rate) {
+    let equity = 0
+    let total_interest_cost = 0
+    let average_days = 365 / 12
+    while (number_of_days > average_days) {
+        // calculate the interest cost for one day, based on the current loan value
+        let daily_interest_cost = loan_value * daily_interest_rate
+
+        // calculate the toatal interest cost for the month
+        let cost_between_contributions = daily_interest_cost * average_days
+
+        // add the interest cosst to the loan value
+        loan_value += cost_between_contributions
+
+        // subtract the contribution
+        loan_value -= contribution
+
+        // add the contribution minus the interest cost to the equity
+        equity += contribution - cost_between_contributions
+
+        // add interest cost to the total
+        total_interest_cost += cost_between_contributions
+
+        // run the loop by subtracting a month from the number of days input 
+        number_of_days -= average_days
+
+    }
+    // return: loan end value, equity, total interest cost
+    return {
+        equity,
+        loan_end_value: loan_value,
+        total_interest_cost
+    }
+
+}
+
+
 
 runCalcs()

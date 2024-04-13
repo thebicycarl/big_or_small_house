@@ -37,7 +37,9 @@ and/or
 - make calculations in .js
     - ~~basic calculations on the inputs~~
     - ~~calculation for loan payoff~~
-    - comparison calcs
+    - ~~comparison calcs~~
+    - need to re-work to have the cheaper loan payoff amounts the total house price, for every time after the first
+    - and add the deposit amount to the expensive house equity
 - build html page to take the inputs, and display outputs
 - style page and make usable without graphs
 - add in error handling for loan terms that never pay off
