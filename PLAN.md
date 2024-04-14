@@ -45,7 +45,7 @@ and/or
 - style page and make usable without graphs
 - add in error handling for loan terms that never pay off
 - deploy to live
-- star to github
+- ~~star to github~~
 - add to portfolio page
 - upgrade the page to use graphs with D3.js
 - build web scraper to display interest rate options from main banks

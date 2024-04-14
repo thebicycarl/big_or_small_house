@@ -1,4 +1,3 @@
-
 // test variables:
 // let loan_value = 500000
 // let contribution = 3500
@@ -27,7 +26,6 @@ export function calculatePayoff(loan_value, contribution, monthly_interest_rate,
         // increment month counter
         months ++
     }
-
 
     let year_count = Math.floor(months / 12)
     let and_months = months % 12
