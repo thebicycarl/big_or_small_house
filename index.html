@@ -1,14 +1,26 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Go Cheaper</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap" rel="stylesheet">
 </head>
+
 <body>
     <header>
-        <div><a href="">Go Cheaper</a></div>
-        <div><a href=""></a></div>
+        <div class="header">
+            <div><a href="" id="headerText">Go Cheaper</a></div>
+            <div><a href="" id="headerIcon"><span class="material-symbols-outlined">
+                        account_circle
+                    </span></a></div>
+        </div>
     </header>
     <section>
         <div>
@@ -18,7 +30,8 @@
     </section>
     <section>
         <h1>Buy a cheaper house and build wealth faster</h1>
-        <p>You will pay off a cheaper loan exponentially faster, because less of your repayments are going toward the interest. Try it below and see.</p>
+        <p>You will pay off a cheaper loan exponentially faster, because less of your repayments are going toward the
+            interest. Try it below and see.</p>
     </section>
     <section>
         <div>
@@ -42,6 +55,16 @@
                 <input type="text" id="rate" class="financialInput">
             </label>
     </section>
-    
+    <section>
+        <div class="outputCard">
+            <div>House A:</div>
+            <div>time until paid off:</div>
+            <div>interest cost:</div>
+        </div>
+        <div class="outputText"></div>
+        <div class="outputText"></div>
+    </section>
+
 </body>
+
 </html>
