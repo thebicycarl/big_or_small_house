@@ -16,6 +16,14 @@ prussian blue: 022f40 */
     margin: 0;
     padding: 0;
     background-color: var(--background-color);
+    /* border: 0.5px solid black; */
+    gap: 10px;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 header {
@@ -63,4 +71,44 @@ a {
         'GRAD' 0,
         'opsz' 48
 
+}
+
+main {
+    max-width: 1000px;
+    display: flex;
+    flex-direction: column; 
+}
+
+#heading {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+#mainDiv {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+#inputs {
+    display: flex;
+    flex-direction: column;
+}
+
+.inputLabel {
+    display: flex;
+    flex-direction: column;
+}
+
+#graphs {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.graph {
+    border: 0.5px solid black;
+    min-width: 200px;
+    min-height: 200px;
 }
