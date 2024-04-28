@@ -1,10 +1,21 @@
-import { calculatePayoff } from "./calculate_payoff.js"
+let deposit = document.getElementById('deposit')
+let calcButton = document.getElementById('runBtn')
+let outputText = document.getElementById('eTime')
+let testValue = 0;
 
-let loan_value = 500000
-let payoff_to = 250000
-let contribution = 3500
-let interest_rate = 6
-let monthly_interest_rate = interest_rate / 12 / 100
+calcButton.addEventListener('click', testRun)
+
+function testRun() {
+    let depositv = deposit.value
+    testValue = depositv * 2
+    console.log(deposit.value)
+    console.log(depositv)
 
 
-// console.log(calculatePayoff(loan_value, contribution, monthly_interest_rate, payoff_to))
+    outputText.innerHTML=`${depositv}`
+    run2()
+}
+
+function run2() {
+    console.log(testValue)
+}

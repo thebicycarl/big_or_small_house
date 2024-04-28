@@ -11,6 +11,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap" rel="stylesheet">
+    <script src="main.js" type="module" defer></script>
 </head>
 
 <body>
@@ -24,7 +25,7 @@
     </header>
     <main>
         <section id="heading">
-            <h1>Buy a cheaper house and build wealth faster</h1>
+            <h1>Buy a cheaper house and <span>build wealth faster</span></h1>
             <p class="headingText">You will pay off a cheaper loan exponentially faster, because more of your repayments
                 are
                 going toward the capital.</p>
@@ -40,7 +41,7 @@
                     <input type="text" id="repayments" class="financialInput">
                 </label>
                 <div>
-                    <input type="radio" id="monthly" name="frequency" value="monthly" checked />
+                    <input type="radio" id="monthly" name="frequency" value="monthly"/>
                     <label for="monthly">Monthly</label>
                   </div>
                 
@@ -62,8 +63,8 @@
 
                     </div>
                     <div class="outputCard">
-                        <div>Time until paid off:</div>
-                        <div>Interest cost:</div>
+                        <div>Time until paid off: <span class="outputText" id="eTime"></span></div>
+                        <div>Interest cost:<span class="outputText" id="eInterest"></span></div>
                     </div>
 
                 </div>
@@ -75,9 +76,9 @@
 
                     </div>
                     <div class="outputCard">
-                        <div>Time until paid off:</div>
-                        <div>Interest cost:</div>
-                        <div>Equity after __ years</div>
+                        <div>Time until paid off: <span class="outputText" id="cTime"></span></div>
+                        <div>Interest cost: <span class="outputText" id="cInterest"></span></div>
+                        <div>Equity after <span id="eTime"></span>years: <span class="outputText" id="equity"></span></div>
                     </div>
 
                 </div>
@@ -89,6 +90,7 @@
                 <div>Comparison:</div>
 
             </div>
+            <button id="runBtn">calculate</button>
         </section>
     </main> 
 </body>

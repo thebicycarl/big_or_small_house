@@ -5,6 +5,9 @@ When buying a house, if you buy an expensive house, most of your contributions t
 
 Also displays some current interest rate examples from a comparison site. 
 
+Styles similar to unloan: 
+https://www.unloan.com.au/calculators 
+
 ## Architecture
 Simple front-end website
 

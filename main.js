@@ -5,21 +5,40 @@ import { calculatePayoff } from "./calculate_payoff.js"
 import { equityGivenMonths } from "./equity_given_months.js"
 
 // declare the input variables
-const expensive_house_price = 750000
-const formatted_expensive_price = expensive_house_price.toLocaleString()
-const cheaper_house_price = 500000
-const formatted_cheaper_price = cheaper_house_price.toLocaleString()
-const deposit = 150000
-const contribution = 3500
-const contribution_frequency = 'monthly'
-const interest_rate = 6
-const monthly_interest_rate = interest_rate / 12 / 100
+let expensive_house_price = 750000
+let cheaper_house_price = 500000
+let deposit = 150000
+let contribution = 3500
+let contribution_frequency = 'monthly'
+let interest_rate = 6
+let monthly_interest_rate = interest_rate / 12 / 100
+// const formatted_expensive_price = expensive_house_price.toLocaleString()
+// const formatted_cheaper_price = cheaper_house_price.toLocaleString()
+
+let expensive_house_input = document.getElementById('expensive')
+let cheaper_house_input = document.getElementById('cheaper')
+let deposit_input = document.getElementById('deposit')
+let contribution_input = document.getElementById('repayments')
+let frequency_input = document.querySelector('input[name="frequency"]:checked')
+let interest_rate_input = document.getElementById('rate')
+let calc_button = document.getElementById('runBtn')
 
 // run function performing basic calcs, including converting from weekly to monthly contributions and passing object to calculation functions as required
 function runCalcs() {
+    console.log(frequency_input)
+    expensive_house_price = expensive_house_input.value
+    cheaper_house_price = cheaper_house_input.value
+    deposit = deposit_input.value
+    contribution = contribution_input.value
+    contribution_frequency = frequency_input.value
+    console.log(contribution_frequency)
+    interest_rate = interest_rate_input.value
+    monthly_interest_rate = interest_rate / 12 / 100
+
     if (contribution_frequency === 'weekly') {
         contribution = contribution * 52 / 12
     }
+
     let expensive_loan_value = expensive_house_price - deposit
     let cheaper_loan_value = cheaper_house_price - deposit
 
@@ -109,4 +128,4 @@ function sameTimeEquity(payoff_expensive, payoff_cheaper, payoff_subsequent_chea
     }
 }
 
-runCalcs()
+calc_button.addEventListener('click', runCalcs)
