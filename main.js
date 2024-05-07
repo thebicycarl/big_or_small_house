@@ -30,7 +30,7 @@ function runCalcs() {
     cheaper_house_price = cheaper_house_input.value
     deposit = deposit_input.value
     contribution = contribution_input.value
-    contribution_frequency = frequency_input.value
+    // contribution_frequency = frequency_input.value
     console.log(contribution_frequency)
     interest_rate = interest_rate_input.value
     monthly_interest_rate = interest_rate / 12 / 100
@@ -128,4 +128,5 @@ function sameTimeEquity(payoff_expensive, payoff_cheaper, payoff_subsequent_chea
     }
 }
 
+// runCalcs()
 calc_button.addEventListener('click', runCalcs)
